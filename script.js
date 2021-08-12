@@ -1,6 +1,7 @@
 const song = new Audio("./media/song_1.mp3");
-const input = document.querySelector(".con textarea");
+const input = document.querySelector(".con input");
 const btn1 = document.querySelector(".con button");
+const textOutput = document.querySelector(".textOutput");
 let condition = false;
 let num = 1000;
 let time = 0;
@@ -10,12 +11,17 @@ let timestart3 = false;
 let cpm = 0;
 let wpm = 0;
 let temp = 0;
+var text =
+  "Space exploration is the use of astronomy and space technology to explore outer space. While the exploration of space is carried out mainly by astronomers with telescopes, its physical exploration though is conducted both by unmanned robotic space probes and human spaceflight. Space exploration, like its classical form astronomy, is one of the main sources for space science.";
+var textOut = "";
+var textIndex = 0;
 
 input.addEventListener("input", (e) => {
   condition = true;
   timeStart = true;
   timestart();
   setinterval();
+  handleInputCheck();
   if (condition) {
     song.play();
   }
@@ -70,10 +76,12 @@ const timestart = () => {
           time = time + 1;
           cpm = Math.round((input.value.length / time) * 60);
           wpm = Math.round((input.value.length / 5 / time) * 60);
-          document.getElementById('meter').innerText = `Time: ${time} CPM: ${cpm} WPM: ${wpm}`
+          document.getElementById(
+            "meter"
+          ).innerText = `Time: ${time} CPM: ${cpm} WPM: ${wpm}`;
         }
         if (time == 60) {
-          clearInterval(meterInterval)
+          clearInterval(meterInterval);
           clearInterval(myinterval);
         }
       }, 1000);
@@ -86,3 +94,26 @@ btn1.addEventListener("click", () => {
   song.pause();
   clearInterval(myinterval);
 });
+
+handleStringToArray = (text, textArr) => {
+  for (let i = 0; i < text.length; i++) {
+    textArr.push(text[i]);
+  }
+};
+// handleStringToArray(text, textArr)
+
+const handleInputCheck = () => {
+  if (input.value[textIndex] == text[textIndex]) {
+    textOut = textOut + text[textIndex];
+    textOutput.innerText = textOut;
+    input.value = textOut;
+    textIndex++;
+  } else if (input.value[textIndex] != text[textIndex]) {
+    input.value = textOut;
+  }
+};
+const preventBackspace = (event) => {
+  if (event.keyCode == 8) {
+    event.preventDefault();
+  }
+};
