@@ -190,26 +190,6 @@ const preventBackspace = (event) => {
 };
 
 btn2.addEventListener("click", () => {
-  condition = false;
-  num = 1000;
-  time = 0;
-  timeStart = false;
-  timestart2 = false;
-  timestart3 = false;
-  cpm = 0;
-  wpm = 0;
-  temp = 0;
-  text =
-    "Space exploration is the use of astronomy and space technology to explore outer space. While the exploration of space is carried out mainly by astronomers with telescopes, its physical exploration though is conducted both by unmanned robotic space probes and human spaceflight. Space exploration, like its classical form astronomy, is one of the main sources for space science.";
-  textOut = "";
-  textIndex = 0;
-  textTemp = "";
-  textArrIndex_1 = 0;
-  textArrIndex_2 = 5;
-  textArrLength = 0;
-  const interval_id = window.setInterval(function(){}, Number.MAX_SAFE_INTEGER);
-  for (let i = 1; i < interval_id; i++) {
-  window.clearInterval(i);
-  }
+  location.reload()
   });
 input.focus();
