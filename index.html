@@ -4,24 +4,26 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="style.css" />
+    <link
+      href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./css/style.css" />
     <title>Type</title>
   </head>
   <body>
     <div class="con">
-      <div class="text">
-        Space exploration is the use of astronomy and space technology to
-        explore outer space. While the exploration of space is carried out
-        mainly by astronomers with telescopes, its physical exploration though
-        is conducted both by unmanned robotic space probes and human
-        spaceflight. Space exploration, like its classical form astronomy, is
-        one of the main sources for space science.
-      </div>
-      <input type="text" onkeydown="preventBackspace(event)" />
+      <div class="text-base border textTemp"></div>
+      <input
+        class="text-base border border-black"
+        type="text"
+        onkeydown="preventBackspace(event)"
+      />
       <div class="textOutput"></div>
       <h4 id="meter">Time: 0 CPM: 0 WPM: 0</h4>
-      <button>pause</button>
+      <button class="pauseBtn">Pause</button>
+      <button class="resetBtn">Reset</button>
     </div>
-    <script src="./script.js"></script>
+    <script src="./js/script.js"></script>
   </body>
 </html>
