@@ -5,20 +5,26 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link
-      href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css"
-      rel="stylesheet"
-    />
+    href="./css/tailwind.min.css"
+    rel="stylesheet"
+  />
     <link rel="stylesheet" href="./css/style.css" />
     <title>Type</title>
   </head>
-  <body>
-    <div class="con">
-      <div class="text-base border textTemp"></div>
-      <input
-        class="text-base border border-black"
-        type="text"
-        onkeydown="preventBackspace(event)"
-      />
+  <body class="flex flex-col justify-center items-center">
+    <div class="con flex flex-col justify-center items-center w-screen">
+      <div class="inputCon font-mono font-bold w-full">
+        <div class="textInputCon flex flex-col justify-center items-center relative w-full">
+          <div class="textCon_1 absolute"></div>
+          <div class="text-3xl flex justify-center items-center text-white textTemp absolute w-4/5 h-10 pointer-events-none text-center"></div>
+          <div class="preTextOutput flex flex-col justify-center items-center text-3xl text-white absolute"></div>
+          <input
+            class="text-base opacity-0 w-4/5 h-10"
+            type="text"
+            onkeydown="preventBackspace(event)"
+          />
+        </div>
+      </div>
       <div class="textOutput"></div>
       <h4 id="meter">Time: 0 CPM: 0 WPM: 0</h4>
       <button class="pauseBtn border border-black p-1">Pause</button>

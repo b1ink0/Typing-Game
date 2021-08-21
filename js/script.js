@@ -3,8 +3,9 @@ const input = document.querySelector(".con input");
 const btn1 = document.querySelector(".pauseBtn");
 const btn2 = document.querySelector(".resetBtn");
 const textOutput = document.querySelector(".textOutput");
+const preTextOutput = document.querySelector(".preTextOutput");
 const textTempDiv = document.querySelector(".textTemp");
-
+const textCon_1 = document.querySelector(".textCon_1");
 let condition = false;
 let num = 1000;
 let time = 0;
@@ -24,22 +25,35 @@ let textArrIndex_2 = 5;
 let textArrLength = 0;
 let textIndexColor = 0;
 let textIndexColorSub = 1;
+let inputFocus = false;
 
 let textArr = text.split(" ");
 let textArrTemp = textArr.slice(textArrIndex_1, textArrIndex_2);
 textTemp = textArrTemp.join("_") + "_";
 textTempDiv.innerHTML =
-  textTemp.slice(0, 0) + `<span>${textTemp[0]}</span>` + textTemp.slice(1);
+  textTemp.slice(0, 0) +
+  `<span class="span_1">${textTemp[0]}</span>` +
+  `<span class="span_2">${textTemp.slice(1)}</span>`;
+  preTextOutput.innerHTML = `<div class="downText text-3xl text-white absolute">${
+    textArr.slice(textArrIndex_1 + 5, textArrIndex_2 + 5).join("_") + "_"
+  }</div>`;
 textArrLength = textTemp.length;
 textIndexColor = textTemp.length;
 
 const handleColorDiv = () => {
   return (
     textTemp.slice(0, textIndexColorSub) +
-    `<span>${textTemp[textIndexColorSub]}</span>` +
-    textTemp.slice(textIndexColorSub + 1)
+    `<span class="span_1">${textTemp[textIndexColorSub]}</span>` +
+    `<span class="span_2">${textTemp.slice(textIndexColorSub + 1)}</span>`
   );
 };
+const handleRedColorDiv = () => {
+  return (
+    textTemp.slice(0, textIndexColorSub -1 ) +
+    `<span class="span_3">${textTemp[textIndexColorSub - 1]}</span>` +
+    `<span class="span_2">${textTemp.slice(textIndexColorSub )}</span>`
+  );
+}
 
 const handleText = () => {
   if (textArrLength - 1 == textIndexColorSub) {
@@ -52,6 +66,12 @@ const handleText = () => {
     textIndexColorSub = 0;
   }
   if (textArrLength == input.value.length) {
+    textCon_1.innerHTML = `<div class="up_1 text-3xl text-white">${
+      textArr.slice(textArrIndex_1, textArrIndex_2).join("_") + "_"
+    }</div>`;
+    if (document.querySelector('.downText')){
+      document.querySelector('.downText').classList.add('up_2')
+    }
     textArrIndex_1 = textArrIndex_1 + 5;
     textArrIndex_2 = textArrIndex_2 + 5;
     textArrTemp = textArr.slice(textArrIndex_1, textArrIndex_2);
@@ -60,6 +80,11 @@ const handleText = () => {
     textArrLength = textArrLength + textTemp.length;
     textIndexColor = textTemp.length;
     textIndexColorSub = 0;
+    setTimeout(()=>{
+      preTextOutput.innerHTML = `<div class="downText text-3xl text-white absolute">${
+        textArr.slice(textArrIndex_1 + 5, textArrIndex_2 + 5).join("_") + "_"
+      }</div>`;
+    },300)
   }
 };
 
@@ -68,10 +93,12 @@ const handleTextColor = () => {
     textTempDiv.innerHTML = handleColorDiv();
     textIndexColorSub++;
   } else if (textIndexColorSub == textIndexColor) {
-    console.log("f");
     textIndexColorSub = 0;
   }
 };
+const handleTextColorRed = () => {
+  textTempDiv.innerHTML = handleRedColorDiv();
+}
 
 input.addEventListener("input", (e) => {
   condition = true;
@@ -181,6 +208,7 @@ const handleInputCheck = () => {
     handleTextColor();
   } else if (input.value[textIndex] != text[textIndex]) {
     input.value = textOut;
+    handleTextColorRed();
   }
 };
 const preventBackspace = (event) => {
@@ -190,6 +218,15 @@ const preventBackspace = (event) => {
 };
 
 btn2.addEventListener("click", () => {
-  location.reload()
-  });
+  location.reload();
+});
 input.focus();
+document.addEventListener("click", () => {
+  if (document.activeElement.tagName == "INPUT") {
+    console.log("input active");
+    inputFocus = true;
+  } else {
+    console.log("input inactive");
+    inputFocus = false;
+  }
+});
