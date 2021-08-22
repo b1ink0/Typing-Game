@@ -2,10 +2,12 @@ const song = new Audio("./media/song_1.mp3");
 const input = document.querySelector(".con input");
 const btn1 = document.querySelector(".pauseBtn");
 const btn2 = document.querySelector(".resetBtn");
-const textOutput = document.querySelector(".textOutput");
 const preTextOutput = document.querySelector(".preTextOutput");
 const textTempDiv = document.querySelector(".textTemp");
 const textCon_1 = document.querySelector(".textCon_1");
+const wpmMeterHand = document.querySelector(".wpmMeterHand");
+const wpmMainMeter = document.querySelector(".wpmMainMeter");
+
 let condition = false;
 let num = 1000;
 let time = 0;
@@ -34,9 +36,9 @@ textTempDiv.innerHTML =
   textTemp.slice(0, 0) +
   `<span class="span_1">${textTemp[0]}</span>` +
   `<span class="span_2">${textTemp.slice(1)}</span>`;
-  preTextOutput.innerHTML = `<div class="downText text-3xl text-white absolute">${
-    textArr.slice(textArrIndex_1 + 5, textArrIndex_2 + 5).join("_") + "_"
-  }</div>`;
+preTextOutput.innerHTML = `<div class="downText text-3xl text-white absolute">${
+  textArr.slice(textArrIndex_1 + 5, textArrIndex_2 + 5).join("_") + "_"
+}</div>`;
 textArrLength = textTemp.length;
 textIndexColor = textTemp.length;
 
@@ -49,11 +51,11 @@ const handleColorDiv = () => {
 };
 const handleRedColorDiv = () => {
   return (
-    textTemp.slice(0, textIndexColorSub -1 ) +
+    textTemp.slice(0, textIndexColorSub - 1) +
     `<span class="span_3">${textTemp[textIndexColorSub - 1]}</span>` +
-    `<span class="span_2">${textTemp.slice(textIndexColorSub )}</span>`
+    `<span class="span_2">${textTemp.slice(textIndexColorSub)}</span>`
   );
-}
+};
 
 const handleText = () => {
   if (textArrLength - 1 == textIndexColorSub) {
@@ -69,8 +71,8 @@ const handleText = () => {
     textCon_1.innerHTML = `<div class="up_1 text-3xl text-white">${
       textArr.slice(textArrIndex_1, textArrIndex_2).join("_") + "_"
     }</div>`;
-    if (document.querySelector('.downText')){
-      document.querySelector('.downText').classList.add('up_2')
+    if (document.querySelector(".downText")) {
+      document.querySelector(".downText").classList.add("up_2");
     }
     textArrIndex_1 = textArrIndex_1 + 5;
     textArrIndex_2 = textArrIndex_2 + 5;
@@ -80,11 +82,11 @@ const handleText = () => {
     textArrLength = textArrLength + textTemp.length;
     textIndexColor = textTemp.length;
     textIndexColorSub = 0;
-    setTimeout(()=>{
+    setTimeout(() => {
       preTextOutput.innerHTML = `<div class="downText text-3xl text-white absolute">${
         textArr.slice(textArrIndex_1 + 5, textArrIndex_2 + 5).join("_") + "_"
       }</div>`;
-    },300)
+    }, 300);
   }
 };
 
@@ -98,7 +100,7 @@ const handleTextColor = () => {
 };
 const handleTextColorRed = () => {
   textTempDiv.innerHTML = handleRedColorDiv();
-}
+};
 
 input.addEventListener("input", (e) => {
   condition = true;
@@ -160,9 +162,11 @@ const timestart = () => {
           time = time + 1;
           cpm = Math.round((input.value.length / time) * 60);
           wpm = Math.round((input.value.length / 5 / time) * 60);
-          document.getElementById(
-            "meter"
-          ).innerText = `Time: ${time} CPM: ${cpm} WPM: ${wpm}`;
+          wpmMainMeter.innerHTML = `<span>${wpm}</span>`;
+          wpmMeterHand.style.transform = `translate(77px, 95px) rotate(${
+            wpm * 1.5 - 90
+          }deg)`;
+          console.log(wpmMeterHand);
         }
         if (time == 60) {
           clearInterval(meterInterval);
@@ -202,7 +206,6 @@ handleStringToArray = (text, textArr) => {
 const handleInputCheck = () => {
   if (input.value[textIndex] == text[textIndex]) {
     textOut = textOut + text[textIndex];
-    textOutput.innerText = textOut;
     input.value = textOut;
     textIndex++;
     handleTextColor();

@@ -2,7 +2,9 @@
   --black: #000000;
   --green: #05c50f;
   --gray: #ffffff77;
-  --red: red;
+  --red: #ff0000;
+  --cyan: #00ffff;
+  --yellow: #ffff00;
 }
 * {
   margin: 0;
@@ -26,8 +28,14 @@ body {
   animation: up_1 0.3s linear forwards;
 }
 @keyframes up_1 {
-  0%{transform:translate(0) scale(1); opacity: 1;}
-  100%{transform: translate(0, -45px) scale(1); opacity: 0.3;}
+  0% {
+    transform: translate(0) scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: translate(0, -45px) scale(1);
+    opacity: 0.3;
+  }
 }
 
 .con {
@@ -41,13 +49,136 @@ body {
   animation: fadeIn 0.3s linear forwards;
 }
 @keyframes fadeIn {
-  0%{opacity: 0;}
-  100%{opacity: 0.3;}
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 0.3;
+  }
 }
 .up_2 {
-  animation:  up_2 0.3s linear forwards;
+  animation: up_2 0.3s linear forwards;
 }
 @keyframes up_2 {
-  0%{transform: translate(0,0px) scale(1); opacity: 0.3;}
-  100%{transform: translate(0,-45px) scale(1);opacity: 0.5;}
+  0% {
+    transform: translate(0, 0px) scale(1);
+    opacity: 0.3;
+  }
+  100% {
+    transform: translate(0, -45px) scale(1);
+    opacity: 0.5;
+  }
+}
+.wpmMainMeter {
+  transform: translate(56px, 15px);
+  color: var(--yellow);
+  font-weight: bold;
+  font-size: 30px;
+  text-shadow: 0 0 2px var(--yellow), 0 0 10px var(--yellow);
+}
+.wpmMainMeter span {
+  animation: testEffect 0.5s ease forwards;
+}
+@keyframes testEffect {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.5);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+.wpmMeter h1 {
+  color: var(--cyan);
+  font-weight: bold;
+  text-shadow: 0 0 2px var(--cyan), 0 0 10px var(--cyan);
+}
+.wpmMeter h1:nth-child(1) {
+  transform: translate(5px, 142px);
+}
+.wpmMeter h1:nth-child(2) {
+  transform: translate(8px, 110px);
+}
+.wpmMeter h1:nth-child(3) {
+  transform: translate(33px, 80px);
+}
+.wpmMeter h1:nth-child(4) {
+  transform: translate(70px, 70px);
+}
+.wpmMeter h1:nth-child(5) {
+  transform: translate(110px, 80px);
+}
+.wpmMeter h1:nth-child(6) {
+  transform: translate(133px, 110px);
+}
+.wpmMeter h1:nth-child(7) {
+  transform: translate(142px, 142px);
+}
+@keyframes meterAnime {
+  0% {
+    font-weight: 900;
+  }
+  50% {
+    font-weight: 100;
+  }
+  100% {
+    font-weight: 900;
+  }
+}
+.wpmMeterHand {
+  width: 0;
+  height: 0;
+  border-left: 3px solid transparent;
+  border-right: 3px solid transparent;
+  border-bottom: 60px solid var(--red);
+  transform: translate(77px, 95px) rotate(-90deg);
+  transform-origin: bottom;
+  transition: all 0.5s ease-in;
+}
+.wpmMeterHand::after {
+  content: "";
+  position: absolute;
+  width: 0;
+  height: 0;
+  border-left: 3px solid transparent;
+  border-right: 3px solid transparent;
+  border-bottom: 60px solid var(--red);
+  filter: blur(2px);
+}
+.wpmMeterHand::before {
+  content: "";
+  position: absolute;
+  width: 0;
+  height: 0;
+  border-left: 3px solid transparent;
+  border-right: 3px solid transparent;
+  border-bottom: 60px solid var(--red);
+  filter: blur(2px);
+}
+.wpmMeterHandBase {
+  width: 10px;
+  height: 10px;
+  background: red;
+  border-radius: 100%;
+  transform: translate(75px, 150px);
+}
+.wpmMeterHandBase::before {
+  content: "";
+  border-radius: 100%;
+  width: 10px;
+  height: 10px;
+  background: red;
+  position: absolute;
+  filter: blur(2px);
+}
+.wpmMeterHandBase::after {
+  content: "";
+  border-radius: 100%;
+  width: 10px;
+  height: 10px;
+  background: red;
+  position: absolute;
+  filter: blur(2px);
 }
