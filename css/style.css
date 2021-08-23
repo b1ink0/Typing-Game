@@ -1,10 +1,11 @@
 :root {
   --black: #000000;
-  --green: #05c50f;
+  --green: #00ff0d;
   --gray: #ffffff77;
   --red: #ff0000;
   --cyan: #00ffff;
   --yellow: #ffff00;
+  --purple: #b106ff;
 }
 * {
   margin: 0;
@@ -16,13 +17,14 @@ body {
 }
 .span_1 {
   color: var(--green);
+  text-shadow: 0 0 2px var(--green), 0 0 10px var(--green);
 }
 .span_2 {
-  /* color: var(--gray); */
   opacity: 0.5;
 }
 .span_3 {
   color: var(--red);
+  text-shadow: 0 0 2px var(--red), 0 0 10px var(--red);
 }
 .up_1 {
   animation: up_1 0.3s linear forwards;
@@ -69,14 +71,24 @@ body {
     opacity: 0.5;
   }
 }
-.wpmMainMeter {
-  transform: translate(56px, 15px);
+.wpmMainMeter,
+.cpmMainMeter,
+.timeCon,
+.accuracyCon {
+  transform: translate(56px, 0px);
   color: var(--yellow);
   font-weight: bold;
   font-size: 30px;
   text-shadow: 0 0 2px var(--yellow), 0 0 10px var(--yellow);
 }
-.wpmMainMeter span {
+.timeCon,
+.accuracyCon {
+  transform: translate(0, 0);
+}
+.wpmMainMeter span,
+.cpmMainMeter span,
+.time_Con span,
+.accuracy_Con span {
   animation: testEffect 0.5s ease forwards;
 }
 @keyframes testEffect {
@@ -84,11 +96,25 @@ body {
     transform: scale(1);
   }
   50% {
-    transform: scale(1.5);
+    transform: scale(1.3);
   }
   100% {
     transform: scale(1);
   }
+}
+.wpmCon,
+.cpmCon,
+.timeText,
+.accuracyText {
+  transform: translate(56px, 30px);
+  color: var(--purple);
+  font-weight: bold;
+  font-size: 25px;
+  text-shadow: 0 0 2px var(--purple), 0 0 10px var(--purple);
+}
+.timeText,
+.accuracyText {
+  transform: translate(0, 0);
 }
 .wpmMeter h1 {
   color: var(--cyan);
@@ -116,18 +142,9 @@ body {
 .wpmMeter h1:nth-child(7) {
   transform: translate(142px, 142px);
 }
-@keyframes meterAnime {
-  0% {
-    font-weight: 900;
-  }
-  50% {
-    font-weight: 100;
-  }
-  100% {
-    font-weight: 900;
-  }
-}
-.wpmMeterHand {
+
+.wpmMeterHand,
+.cpmMeterHand {
   width: 0;
   height: 0;
   border-left: 3px solid transparent;
@@ -137,7 +154,8 @@ body {
   transform-origin: bottom;
   transition: all 0.5s ease-in;
 }
-.wpmMeterHand::after {
+.wpmMeterHand::after,
+.cpmMeterHand::after {
   content: "";
   position: absolute;
   width: 0;
@@ -147,7 +165,8 @@ body {
   border-bottom: 60px solid var(--red);
   filter: blur(2px);
 }
-.wpmMeterHand::before {
+.wpmMeterHand::before,
+.cpmMeterHand::before {
   content: "";
   position: absolute;
   width: 0;

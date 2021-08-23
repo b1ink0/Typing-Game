@@ -6,7 +6,11 @@ const preTextOutput = document.querySelector(".preTextOutput");
 const textTempDiv = document.querySelector(".textTemp");
 const textCon_1 = document.querySelector(".textCon_1");
 const wpmMeterHand = document.querySelector(".wpmMeterHand");
+const cpmMeterHand = document.querySelector(".cpmMeterHand");
 const wpmMainMeter = document.querySelector(".wpmMainMeter");
+const cpmMainMeter = document.querySelector(".cpmMainMeter");
+const timeCon = document.querySelector(".time_Con");
+const accuracyCon = document.querySelector(".accuracy_Con");
 
 let condition = false;
 let num = 1000;
@@ -28,6 +32,7 @@ let textArrLength = 0;
 let textIndexColor = 0;
 let textIndexColorSub = 1;
 let inputFocus = false;
+let mistakes = 0;
 
 let textArr = text.split(" ");
 let textArrTemp = textArr.slice(textArrIndex_1, textArrIndex_2);
@@ -162,11 +167,19 @@ const timestart = () => {
           time = time + 1;
           cpm = Math.round((input.value.length / time) * 60);
           wpm = Math.round((input.value.length / 5 / time) * 60);
+          timeCon.innerHTML = `<span>${time}s</span>`;
+          accuracyCon.innerHTML = `<span>${(
+            ((text.length - mistakes) / text.length) *
+            100
+          ).toFixed(0)}%</span>`;
           wpmMainMeter.innerHTML = `<span>${wpm}</span>`;
+          cpmMainMeter.innerHTML = `<span>${cpm}</span>`;
           wpmMeterHand.style.transform = `translate(77px, 95px) rotate(${
             wpm * 1.5 - 90
           }deg)`;
-          console.log(wpmMeterHand);
+          cpmMeterHand.style.transform = `translate(77px, 95px) rotate(${
+            cpm * 0.3 - 90
+          }deg)`;
         }
         if (time == 60) {
           clearInterval(meterInterval);
@@ -212,6 +225,7 @@ const handleInputCheck = () => {
   } else if (input.value[textIndex] != text[textIndex]) {
     input.value = textOut;
     handleTextColorRed();
+    mistakes++;
   }
 };
 const preventBackspace = (event) => {
