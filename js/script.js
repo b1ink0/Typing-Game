@@ -11,6 +11,7 @@ const wpmMainMeter = document.querySelector(".wpmMainMeter");
 const cpmMainMeter = document.querySelector(".cpmMainMeter");
 const timeCon = document.querySelector(".time_Con");
 const accuracyCon = document.querySelector(".accuracy_Con");
+const barSpan = document.querySelector(".bar span");
 
 let condition = false;
 let num = 1000;
@@ -127,6 +128,7 @@ const handlepause = () => {
         var vol = Math.round(song.volume * 10);
         vol = vol - 1;
         song.volume = vol / 10;
+        barSpan.style.width = `${vol * 10}%`;
         if (vol == 0) {
           song.pause();
         }
@@ -142,6 +144,7 @@ const handlepause = () => {
         var vol = Math.round(song.volume * 10);
         vol = vol + 1;
         song.volume = vol / 10;
+        barSpan.style.width = `${vol * 10}%`;
       }
       if (Math.round(song.volume * 10) == 10) {
         clearInterval(fadeInSong);
