@@ -1,7 +1,5 @@
 const song = new Audio("./media/song_1.mp3");
 const input = document.querySelector(".con input");
-const btn1 = document.querySelector(".pauseBtn");
-const btn2 = document.querySelector(".resetBtn");
 const preTextOutput = document.querySelector(".preTextOutput");
 const textTempDiv = document.querySelector(".textTemp");
 const textCon_1 = document.querySelector(".textCon_1");
@@ -12,6 +10,7 @@ const cpmMainMeter = document.querySelector(".cpmMainMeter");
 const timeCon = document.querySelector(".time_Con");
 const accuracyCon = document.querySelector(".accuracy_Con");
 const barSpan = document.querySelector(".bar span");
+const startTyping = document.querySelector(".startTyping");
 
 let condition = false;
 let num = 1000;
@@ -129,6 +128,7 @@ const handlepause = () => {
         vol = vol - 1;
         song.volume = vol / 10;
         barSpan.style.width = `${vol * 10}%`;
+        // console.table(vol)
         if (vol == 0) {
           song.pause();
         }
@@ -188,6 +188,7 @@ const timestart = () => {
           clearInterval(meterInterval);
           clearInterval(myinterval);
           input.disabled = true;
+          startTyping.innerHTML = `<span class="flex flex-col justify-center items-center font-bold span_4 text-center text-3xl" style="text-shadow: 0 0 2px red, 0 0 10px #ff0000ff; color: #ff0000ff">TIME'S UP !</span>`;
           var fadeSong = setInterval(() => {
             if (Math.round(song.volume * 10) != 0) {
               var vol = Math.round(song.volume * 10);
@@ -207,11 +208,6 @@ const timestart = () => {
     }
   }
 };
-
-btn1.addEventListener("click", () => {
-  song.pause();
-  clearInterval(myinterval);
-});
 
 handleStringToArray = (text, textArr) => {
   for (let i = 0; i < text.length; i++) {
@@ -237,16 +233,28 @@ const preventBackspace = (event) => {
   }
 };
 
-btn2.addEventListener("click", () => {
-  location.reload();
-});
 input.focus();
-document.addEventListener("click", () => {
+
+const handleInputFocus = () => {
   if (document.activeElement.tagName == "INPUT") {
     console.log("input active");
     inputFocus = true;
+    textTempDiv.style.border = "4px solid #ff000000";
+    startTyping.innerHTML = `<span class="flex flex-col justify-center items-center font-bold span_4 text-center text-3xl">START TYPING !</span>`;
   } else {
     console.log("input inactive");
     inputFocus = false;
+    textTempDiv.style.border = "4px solid #ff0000ff";
+    startTyping.innerHTML = `<span class="flex flex-col justify-center items-center font-bold span_4 text-center text-3xl"      style="text-shadow: 0 0 2px red, 0 0 10px #ff0000ff; color: #ff0000ff">CLICK THE RED BOX !</span>`;
   }
+};
+
+handleInputFocus();
+
+document.addEventListener("click", () => {
+  handleInputFocus();
 });
+
+if (time == 60) {
+  console.log('hi')
+}

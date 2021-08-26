@@ -9,6 +9,28 @@
     <title>Type</title>
   </head>
   <body class="flex flex-col justify-center items-center">
+    <div
+      class="
+        startTyping
+        flex flex-col
+        justify-center
+        items-center
+        font-bold
+        text-center text-3xl text-white
+        mt-5
+      "
+    >
+      <span class="
+      flex flex-col
+      justify-center
+      items-center
+      font-bold span_4
+      text-center text-3xl text-white
+      "
+      >
+        Start Typing !
+      </span>
+    </div>
     <div class="bar flex justify-start items-center">
       <span></span>
     </div>
@@ -35,7 +57,7 @@
               textTemp
               absolute
               w-4/5
-              h-10
+              h-11
               pointer-events-none
               text-center
             "
@@ -51,15 +73,12 @@
             "
           ></div>
           <input
-            class="text-base opacity-0 w-4/5 h-10"
+            class="text-base cursor-pointer opacity-0 w-4/5 h-10"
             type="text"
             onkeydown="preventBackspace(event)"
           />
         </div>
       </div>
-      <h4 id="meter">Time: 0 CPM: 0 WPM: 0</h4>
-      <button class="pauseBtn border border-black p-1">Pause</button>
-      <button class="resetBtn border border-black p-1">Reset</button>
     </div>
     <div class="meters w-screen flex justify-around items-center">
       <div class="wpm w-40 h-40 mx-12 relative">
