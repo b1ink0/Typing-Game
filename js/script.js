@@ -11,6 +11,7 @@ const timeCon = document.querySelector(".time_Con");
 const accuracyCon = document.querySelector(".accuracy_Con");
 const barSpan = document.querySelector(".bar span");
 const startTyping = document.querySelector(".startTyping");
+const row_1 = document.querySelectorAll(".keyboard div button");
 
 let condition = false;
 let num = 1000;
@@ -33,6 +34,9 @@ let textIndexColor = 0;
 let textIndexColorSub = 1;
 let inputFocus = false;
 let mistakes = 0;
+let keycode = 0;
+let keyCorrect = false;
+let inputFocusCon = true;
 
 let textArr = text.split(" ");
 let textArrTemp = textArr.slice(textArrIndex_1, textArrIndex_2);
@@ -185,6 +189,7 @@ const timestart = () => {
           }deg)`;
         }
         if (time == 60) {
+          inputFocusCon = false;
           clearInterval(meterInterval);
           clearInterval(myinterval);
           input.disabled = true;
@@ -215,23 +220,59 @@ handleStringToArray = (text, textArr) => {
   }
 };
 
+const preventBackspace = (event) => {
+  keycode = event.keyCode;
+  if (event.keyCode == 8) {
+    event.preventDefault();
+  }
+};
+
 const handleInputCheck = () => {
+  handleNextKey();
+  keyCorrect = false;
   if (input.value[textIndex] == text[textIndex]) {
     textOut = textOut + text[textIndex];
     input.value = textOut;
     textIndex++;
     handleTextColor();
+    keyCorrect = true;
+    handleKeyAnime(keycode, keyCorrect);
   } else if (input.value[textIndex] != text[textIndex]) {
     input.value = textOut;
     handleTextColorRed();
     mistakes++;
+    keyCorrect = false;
+    handleKeyAnime(keycode, keyCorrect);
   }
 };
-const preventBackspace = (event) => {
-  if (event.keyCode == 8) {
-    event.preventDefault();
-  }
+
+const handleKeyAnime = (key, keyCon) => {
+  row_1.forEach((btn) => {
+    if (btn.dataset.key == String.fromCharCode(key)) {
+      if (keyCon) {
+        btn.style.animation = "scaleUpC 0.5s ease";
+        btn.addEventListener("animationend", () => {
+          btn.style.animation = "";
+        });
+      } else if (!keyCon) {
+        btn.style.animation = "scaleUpW 0.5s ease";
+        btn.addEventListener("animationend", () => {
+          btn.style.animation = "";
+        });
+      }
+    }
+  });
 };
+
+const handleNextKey = () => {
+  row_1.forEach((btn) => {
+    if (btn.dataset.key == text[textIndex + 1].toUpperCase()) {
+      btn.style.boxShadow =
+        "inset 0px 0px 8px 2px var(--green), 0px 0px 8px 2px var(--green)";
+    }
+  });
+};
+// handleNextKey();
 
 input.focus();
 
@@ -252,9 +293,7 @@ const handleInputFocus = () => {
 handleInputFocus();
 
 document.addEventListener("click", () => {
-  handleInputFocus();
+  if (inputFocusCon) {
+    handleInputFocus();
+  }
 });
-
-if (time == 60) {
-  console.log('hi')
-}

@@ -6,12 +6,13 @@
   --cyan: #00ffff;
   --yellow: #ffff00;
   --purple: #b106ff;
-  --transparent : #ff000000;
+  --transparent: #ff000000;
 }
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  user-select: none;
 }
 body {
   background-color: var(--black);
@@ -31,8 +32,12 @@ body {
   animation: fadeTitle 0.75s forwards;
 }
 @keyframes fadeTitle {
-  0%{opacity: 0;}
-  100%{opacity: 1;}
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
 }
 .up_1 {
   animation: up_1 0.3s linear forwards;
@@ -238,4 +243,62 @@ body {
   background: red;
   position: absolute;
   filter: blur(2px);
+}
+.keyboard div {
+  margin-top: 12px;
+}
+.keyboard div button {
+  outline: none;
+  width: 50px;
+  height: 50px;
+  background-color: var(--transparent);
+  border: 2px white solid;
+  color: white;
+  border-radius: 10px;
+  margin: 0 6px 0px 6px;
+  box-shadow: inset 0px 0px 8px 2px var(--purple), 0px 0px 8px 2px var(--purple);
+}
+.row_5 button {
+  width: 333px !important;
+}
+.scaleUp {
+  transition: all 0.3s;
+}
+@keyframes scaleUpC {
+  0% {
+    transform: scale(1);
+    box-shadow: inset 0px 0px 8px 2px var(--purple),
+      0px 0px 8px 2px var(--purple);
+    background: var(--transparent);
+  }
+  50% {
+    transform: scale(0.6);
+    box-shadow: inset 0px 0px 8px 2px var(--green), 0px 0px 8px 2px var(--green);
+    background: var(--green);
+  }
+  100% {
+    transform: scale(1);
+    box-shadow: inset 0px 0px 8px 2px var(--purple),
+      0px 0px 8px 2px var(--purple);
+    background: var(--transparent);
+  }
+}
+@keyframes scaleUpW {
+  0% {
+    transform: scale(1);
+    box-shadow: inset 0px 0px 8px 2px var(--purple),
+      0px 0px 8px 2px var(--purple);
+    background: var(--transparent);
+  }
+  50% {
+    transform: scale(0.6);
+    box-shadow: inset 0px 0px 8px 2px var(--red), 0px 0px 8px 2px var(--red);
+    background: var(--red);
+  }
+  100% {
+    transform: scale(1);
+    box-shadow: inset 0px 0px 8px 2px var(--purple),
+      0px 0px 8px 2px var(--purple);
+    background: var(--transparent);
+  }
 }
