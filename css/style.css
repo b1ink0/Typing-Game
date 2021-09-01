@@ -1,5 +1,6 @@
 :root {
   --black: #000000;
+  --white: #ffffff;
   --green: #00ff0d;
   --gray: #ffffff77;
   --red: #ff0000ff;
@@ -13,6 +14,7 @@
   padding: 0;
   box-sizing: border-box;
   user-select: none;
+  -webkit-tap-highlight-color: transparent;
 }
 body {
   background-color: var(--black);
@@ -62,7 +64,7 @@ body {
 .bar {
   width: 300px;
   height: 15px;
-  transform: translate(0, 55px);
+  transform: translate(0, 10px);
   border: solid var(--gray) 3px;
   border-radius: 25px;
 }
@@ -76,7 +78,7 @@ body {
 }
 
 .con {
-  margin-top: 125px;
+  margin-top: 70px;
 }
 .preTextOutput {
   transform: translate(0, 45px);
@@ -112,7 +114,23 @@ body {
   transition: all 0.3s;
 }
 .meters {
-  margin-top: 100px;
+  transform: scale(0.8);
+  margin-top: -50px;
+}
+.cpm {
+  margin-right: 20px;
+}
+.wpm {
+  margin-left: 20px;
+}
+.timeCon {
+  margin: 0 0px 0 0px;
+}
+.time {
+  width: 200px;
+}
+.accuracy {
+  width: 200px;
 }
 .wpmMainMeter,
 .cpmMainMeter,
@@ -244,22 +262,29 @@ body {
   position: absolute;
   filter: blur(2px);
 }
+.keyboard {
+  transform: scale(0.75);
+}
 .keyboard div {
   margin-top: 12px;
 }
 .keyboard div button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
   outline: none;
   width: 50px;
   height: 50px;
   background-color: var(--transparent);
-  border: 2px white solid;
-  color: white;
+  border: 2px var(--white) solid;
+  color: var(--white);
   border-radius: 10px;
+  font-size: 25px;
   margin: 0 6px 0px 6px;
+  transition: all 0.2s;
+  text-shadow: 0 0 2px var(--yellow), 0 0 10px var(--yellow);
   box-shadow: inset 0px 0px 8px 2px var(--purple), 0px 0px 8px 2px var(--purple);
-}
-.row_5 button {
-  width: 333px !important;
 }
 .scaleUp {
   transition: all 0.3s;
@@ -270,17 +295,23 @@ body {
     box-shadow: inset 0px 0px 8px 2px var(--purple),
       0px 0px 8px 2px var(--purple);
     background: var(--transparent);
+    color: var(--white);
+    text-shadow: 0 0 2px var(--yellow), 0 0 10px var(--yellow);
   }
   50% {
-    transform: scale(0.6);
+    transform: scale(0.85);
     box-shadow: inset 0px 0px 8px 2px var(--green), 0px 0px 8px 2px var(--green);
     background: var(--green);
+    color: var(--black);
+    text-shadow: 0 0 2px var(--black), 0 0 10px var(--black);
   }
   100% {
     transform: scale(1);
     box-shadow: inset 0px 0px 8px 2px var(--purple),
       0px 0px 8px 2px var(--purple);
     background: var(--transparent);
+    color: var(--white);
+    text-shadow: 0 0 2px var(--yellow), 0 0 10px var(--yellow);
   }
 }
 @keyframes scaleUpW {
@@ -289,16 +320,22 @@ body {
     box-shadow: inset 0px 0px 8px 2px var(--purple),
       0px 0px 8px 2px var(--purple);
     background: var(--transparent);
+    color: var(--white);
+    text-shadow: 0 0 2px var(--yellow), 0 0 10px var(--yellow);
   }
   50% {
-    transform: scale(0.6);
+    transform: scale(0.85);
     box-shadow: inset 0px 0px 8px 2px var(--red), 0px 0px 8px 2px var(--red);
     background: var(--red);
+    color: var(--black);
+    text-shadow: 0 0 2px var(--black), 0 0 10px var(--black);
   }
   100% {
     transform: scale(1);
     box-shadow: inset 0px 0px 8px 2px var(--purple),
       0px 0px 8px 2px var(--purple);
     background: var(--transparent);
+    color: var(--white);
+    text-shadow: 0 0 2px var(--yellow), 0 0 10px var(--yellow);
   }
 }

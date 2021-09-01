@@ -37,6 +37,8 @@ let mistakes = 0;
 let keycode = 0;
 let keyCorrect = false;
 let inputFocusCon = true;
+let keyAnimeCon = false;
+let inputKey = "";
 
 let textArr = text.split(" ");
 let textArrTemp = textArr.slice(textArrIndex_1, textArrIndex_2);
@@ -48,6 +50,14 @@ textTempDiv.innerHTML =
 preTextOutput.innerHTML = `<div class="downText text-3xl text-white absolute">${
   textArr.slice(textArrIndex_1 + 5, textArrIndex_2 + 5).join("_") + "_"
 }</div>`;
+row_1.forEach((btn) => {
+  btn.style.boxShadow =
+    "inset 0px 0px 8px 2px var(--purple),0px 0px 8px 2px var(--purple)";
+  if (btn.dataset.key == text[textIndex].toUpperCase()) {
+    btn.style.boxShadow =
+      "inset 0px 0px 8px 2px var(--green), 0px 0px 8px 2px var(--green)";
+  }
+});
 textArrLength = textTemp.length;
 textIndexColor = textTemp.length;
 
@@ -228,27 +238,29 @@ const preventBackspace = (event) => {
 };
 
 const handleInputCheck = () => {
-  handleNextKey();
+  inputKey = input.value.slice(-1);
   keyCorrect = false;
   if (input.value[textIndex] == text[textIndex]) {
     textOut = textOut + text[textIndex];
     input.value = textOut;
     textIndex++;
+    keyAnimeCon = true;
     handleTextColor();
     keyCorrect = true;
-    handleKeyAnime(keycode, keyCorrect);
+    handleNextKey();
+    handleKeyAnime(inputKey, keyCorrect);
   } else if (input.value[textIndex] != text[textIndex]) {
     input.value = textOut;
     handleTextColorRed();
     mistakes++;
     keyCorrect = false;
-    handleKeyAnime(keycode, keyCorrect);
+    handleKeyAnime(inputKey, keyCorrect);
   }
 };
 
-const handleKeyAnime = (key, keyCon) => {
+const handleKeyAnime = (inputkey, keyCon) => {
   row_1.forEach((btn) => {
-    if (btn.dataset.key == String.fromCharCode(key)) {
+    if (btn.dataset.key == inputkey.toUpperCase()) {
       if (keyCon) {
         btn.style.animation = "scaleUpC 0.5s ease";
         btn.addEventListener("animationend", () => {
@@ -265,14 +277,17 @@ const handleKeyAnime = (key, keyCon) => {
 };
 
 const handleNextKey = () => {
-  row_1.forEach((btn) => {
-    if (btn.dataset.key == text[textIndex + 1].toUpperCase()) {
+  if (keyAnimeCon) {
+    row_1.forEach((btn) => {
       btn.style.boxShadow =
-        "inset 0px 0px 8px 2px var(--green), 0px 0px 8px 2px var(--green)";
-    }
-  });
+        "inset 0px 0px 8px 2px var(--purple),0px 0px 8px 2px var(--purple)";
+      if (btn.dataset.key == text[textIndex].toUpperCase()) {
+        btn.style.boxShadow =
+          "inset 0px 0px 8px 2px var(--green), 0px 0px 8px 2px var(--green)";
+      }
+    });
+  }
 };
-// handleNextKey();
 
 input.focus();
 
@@ -297,3 +312,7 @@ document.addEventListener("click", () => {
     handleInputFocus();
   }
 });
+
+function isLowerCase(str) {
+  return str == str.toLowerCase() && str != str.toUpperCase();
+}
