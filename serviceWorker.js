@@ -1,15 +1,15 @@
 const staticTypingGame = "typing-game";
 const assets = [
   "/",
-  "/index.html",
-  "/css/style.css",
-  "/css/tailwind.min.css",
-  "/js/script.js",
-  "/media/icons/favicon.ico",
-  "/media/icons/logo192.png",
-  "/media/icons/logo512.png",
-  "/media/icons/maskable192.png",
-  "/media/icons/maskable512.png",
+  "/Typing-Game/index.html",
+  "/Typing-Game/css/style.css",
+  "/Typing-Game/css/tailwind.min.css",
+  "/Typing-Game/js/script.js",
+  "/Typing-Game/media/icons/favicon.ico",
+  "/Typing-Game/media/icons/logo192.png",
+  "/Typing-Game/media/icons/logo512.png",
+  "/Typing-Game/media/icons/maskable192.png",
+  "/Typing-Game/media/icons/maskable512.png",
 ];
 
 self.addEventListener("install", (installEvent) => {
