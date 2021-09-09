@@ -117,14 +117,17 @@ body {
   transform: scale(0.8);
   margin-top: -50px;
 }
-.cpm {
-  margin-right: 20px;
-}
 .wpm {
-  margin-left: 20px;
+  transform: translate(-8px, 0px);
 }
 .timeCon {
   margin: 0 0px 0 0px;
+  height: 85px;
+  transform: scale(0.8);
+}
+.topCon {
+  width: 300px;
+  transform: scale(0.9);
 }
 .time {
   width: 200px;
@@ -144,7 +147,7 @@ body {
 }
 .timeCon,
 .accuracyCon {
-  transform: translate(0, 0);
+  transform: translate(0, 15px) scale(0.8);
 }
 .wpmMainMeter span,
 .cpmMainMeter span,
@@ -170,13 +173,15 @@ body {
   transform: translate(56px, 30px);
   color: var(--purple);
   font-weight: bold;
-  font-size: 25px;
+  font-size: 30px;
   text-shadow: 0 0 2px var(--purple), 0 0 10px var(--purple);
 }
 .timeText,
 .accuracyText {
   transform: translate(0, 0);
+  margin-right: 20px;
 }
+
 .wpmMeter h1 {
   color: var(--cyan);
   font-weight: bold;
